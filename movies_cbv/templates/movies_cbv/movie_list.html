@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Movies</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.4.2/css/bulma.css">
+</head>
+<body>
+  <section class="hero is-fullheight is-danger is-bold">
+    <div class="hero-head">
+    </div>
+    <div class="hero-body">
+      <div class="container has-text-centered">
+        <h3 class="title is-2">Movies!</h3>
+        <div class="content">
+          <ul>
+            {% for movie in object_list %}
+            <li>Nome: {{movie.name}} </br>Diretor: {{movie.director}}</br> {% if movie.amount > 10 %}
+                                                                                                                Quantidade <bold>(alta)</bold> {{movie.amount}}</br>
+                                                                                                                ,{% else %}
+                                                                                                                 Quantidade <bold>(baixa)</bold>: {{movie.amount}}</br>
+                                                                                                                 {% endif %}
+            Limpo: {{movie.limpo}}</br> Comentário: {{movie.comentario}}</li><br>
+            <a class="button" href="{% url 'movies_cbv:movie_edit' movie.id %}">edit</a>
+            <a class="button" href="{% url 'movies_cbv:movie_delete' movie.id %}">delete</a>
+            <br><br>
+            {% empty %}
+            <h2 class="subtitle">Nenhum filme em estoque.</h2>
+            {% endfor %}
+          </ul>
+          <a class="button" href="{% url 'movies_cbv:movie_new' %}">Criar</a>
+        </div>
+
+      </div>
+    </div>
+
+  </section>
+
+</body>
+</html>
+
+
+
+
+
+
+
+<!-- <h1>movies CBV</h1>
+<ul>
+{% for movie in object_list %}
+<li>{{ movie.name }}  ({{ movie.pages }} Pages) ({{movie.amount}} Amount)
+<a href="{% url 'movies_cbv:movie_edit' movie.id %}">edit</a>
+<a href="{% url 'movies_cbv:movie_delete' movie.id %}">delete</a>
+</li>
+{% endfor %}
+</ul>
+
+<a href="{% url 'movies_cbv:movie_new' %}">New</a> -->
